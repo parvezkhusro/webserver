@@ -7,12 +7,12 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 @Component
-public class WebServerDAO {
-    private static final Logger log = LoggerFactory.getLogger(WebServerDAO.class);
+public class WebServerJdbcTDAO {
+    private static final Logger log = LoggerFactory.getLogger(WebServerJdbcTDAO.class);
     final JdbcTemplate jdbcTemplate;
 
     @Autowired
-    public WebServerDAO(JdbcTemplate jdbcTemplate) {
+    public WebServerJdbcTDAO(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
