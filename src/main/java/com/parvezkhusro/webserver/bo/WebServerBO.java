@@ -23,7 +23,4 @@ public class WebServerBO {
     public boolean addJdbc(String param, String value) {
         return webServerDAO.add(param, value);
     }
-
-    public void getUser(String id) {
-    }
 }

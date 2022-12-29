@@ -1,27 +1,39 @@
 package com.parvezkhusro.webserver.controller;
 
-import com.parvezkhusro.webserver.bo.WebServerBO;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.parvezkhusro.webserver.bo.UserServiceImpl;
+import com.parvezkhusro.webserver.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/user")
 public class UserController {
-    final WebServerBO webServerBO;
+    final UserServiceImpl userService;
 
     @Autowired
-    public UserController(WebServerBO webServerBO) {
-        this.webServerBO = webServerBO;
+    public UserController(UserServiceImpl userService) {
+        this.userService = userService;
     }
 
-    @PostMapping("/id")
-    Object getUserById(@PathVariable String id) {
-        webServerBO.getUser(id);
-        return null;
+    @GetMapping(path = {"", "/"})
+    ArrayList<User> getAllUsers() {
+        return userService.findAllUsers();
+    }
+
+    @GetMapping("/{id}")
+    User getUserById(@PathVariable long id) {
+        return userService.findUserByID(id);
+    }
+
+    @PostMapping("/add")
+    boolean addUser(@RequestBody User addUserRequest) {
+       return userService.addUser(addUserRequest);
+    }
+
+    @DeleteMapping("/delete")
+    void deleteAllUsers() {
+        userService.deleteAllData();
     }
 }
