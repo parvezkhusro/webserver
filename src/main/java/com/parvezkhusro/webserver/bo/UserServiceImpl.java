@@ -5,7 +5,6 @@ import com.parvezkhusro.webserver.entities.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -31,10 +30,7 @@ public class UserServiceImpl implements UserService {
     public User findUserByID(long id) {
         log.debug("Came to findUserByID");
         Optional<User> opt = userRepository.findById(id);
-        if (opt.isPresent())
-            return opt.get();
-        else
-            return null;
+        return opt.orElse(null);
     }
 
     @Override
