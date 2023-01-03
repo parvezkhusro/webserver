@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -44,5 +45,13 @@ public class UserServiceImpl implements UserService {
     public void deleteAllData() {
         userRepository.deleteAll();
         log.info("Number of records left: {}", userRepository.count());
+    }
+
+    public List<User> findUserByName(String name) {
+        return userRepository.findByNameContaining(name);
+    }
+
+    public List<User> findUserWithAgeGreaterThan(String age){
+        return userRepository.findByAgeGreaterThan(Long.valueOf(age));
     }
 }

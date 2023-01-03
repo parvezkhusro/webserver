@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/user")
@@ -35,5 +36,15 @@ public class UserController {
     @DeleteMapping("/delete")
     void deleteAllUsers() {
         userService.deleteAllData();
+    }
+
+    @PostMapping("/name/{name}")
+    List<User> findUserByName(@PathVariable String name){
+        return userService.findUserByName(name);
+    }
+
+    @PostMapping("/age/{age}")
+    List<User> findUserWithAgeGreaterThan(@PathVariable String age){
+        return userService.findUserWithAgeGreaterThan(age);
     }
 }
